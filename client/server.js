@@ -4,6 +4,25 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+/*
+ *working with mysql
+ *
+ */
+var mysql = require('mysql');
+
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Cxps#321',
+    database: 'sample'
+});
+connection.connect(function(error) {
+    if (!!error) {
+        console.log('Error');
+    } else {
+        console.log('Connected');
+    }
+});
 // Get our API routes
 const api = require('./server/routes/api');
 
