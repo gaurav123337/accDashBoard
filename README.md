@@ -92,3 +92,5 @@ $ node server.js
 Going to http://localhost:3000 should load the app, and http://localhost:3000/api should show as below.
 
 angular app (http://localhost:3000)
+
+Get node module from this link http://teknosains.com/i/simple-crud-nodejs-mysql 

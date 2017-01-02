@@ -49,7 +49,7 @@ exports.edit = function(req, res) {
 exports.save = function(req, res) {
 
     var input = JSON.parse(JSON.stringify(req.body));
-
+    console.log(input, "INPUT");
     req.getConnection(function(err, connection) {
 
         var data = {
