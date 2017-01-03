@@ -28,7 +28,10 @@ export class AccInfoFormComponent implements OnInit {
   }
 
   getFormVal(formVal){
-    this.accInfoService.getAccountInfo(formVal);
+    this.accInfoService.getAccountInfo(formVal).subscribe(
+      () => console.log('Success'),
+      error =>  console.log('Error!!')
+    ); 
   }
 
 }

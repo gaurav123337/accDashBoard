@@ -11,6 +11,7 @@ import { Collapse } from './slid-effect.directive';
 import { SlideComponent } from './slide/slide.component';
 import { AccInfoFormComponent } from './acc-info-form/acc-info-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { AccInfoFormComponent } from './acc-info-form/acc-info-form.component';
     Collapse,
     SlideComponent,
     AccInfoFormComponent
+ 
   ],
   imports: [
     BrowserModule,

@@ -47,13 +47,19 @@ exports.edit = function(req, res) {
 
 /*Save the customer*/
 exports.save = function(req, res) {
-
+    //console.log(req, "REQ");
+    //console.log(res, "res")
     var input = JSON.parse(JSON.stringify(req.body));
+    // console.log(req.headers, "HEADER");
+    console.log(req.body, "BODY");
+    //var input = JSON.parse(req.body);
+    //var input = req.body;
+    //var input = { "name": "d", "address": "d", "email": "d", "phone": "1112" };
     console.log(input, "INPUT");
+    console.log("In save");
     req.getConnection(function(err, connection) {
 
         var data = {
-
             name: input.name,
             address: input.address,
             email: input.email,
@@ -61,12 +67,18 @@ exports.save = function(req, res) {
 
         };
 
+        // var data = {
+        //     name: input.name,
+        //     address: input.address,
+        //     email: input.email
+        // };
+        console.log(data, "data");
         var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
-
+            console.log("ROWS", rows);
             if (err)
                 console.log("Error inserting : %s ", err);
 
-            res.redirect('/customers');
+            //res.redirect('/customers');
 
         });
 
