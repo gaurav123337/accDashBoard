@@ -11,7 +11,7 @@ import { GetAccountInfoService } from './get-account-info.service';
 })
 export class AccInfoFormComponent implements OnInit {
 
-  private formVal:string;
+  private formVal:any;
 
   constructor(private accInfoService :GetAccountInfoService) {  
 
@@ -27,11 +27,32 @@ export class AccInfoFormComponent implements OnInit {
     this.model = new AccInfo(42, '', '', '', '');
   }
 
-  getFormVal(formVal){
-    this.accInfoService.getAccountInfo(formVal).subscribe(
-      () => console.log('Success'),
-      error =>  console.log('Error!!')
+  // getFormVal(formVal){
+   
+  //   var data = formVal.form.value;
+  //    console.log(data,"formVal data");
+
+  //   this.accInfoService.getAccountInfo(JSON.stringify(data))
+  //     .subscribe(
+  //       () => console.log('Success!!!'),
+  //       error =>  console.error('Error!!')
+  //   ); 
+  // }
+
+  getFormVal(){
+   
+    var data = {
+      "name":"test"
+    };
+     console.log(data,"formVal data");
+
+    this.accInfoService.getAccountInfo(JSON.stringify(data))
+      .subscribe(
+        () => console.log('Success!!!'),
+        error =>  console.error('Error!!')
     ); 
   }
+
+
 
 }

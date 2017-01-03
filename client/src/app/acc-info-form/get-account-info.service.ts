@@ -1,6 +1,7 @@
-import { HttpModule, Http, Headers, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
+import {Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Injectable()
@@ -10,18 +11,13 @@ export class GetAccountInfoService {
 
   constructor(private http: Http) { }
 
-  getAccountInfo(formVal):Observable<any>{
-    console.log(formVal.form.value,"Account Info");//http://localhost:4300/customers/add
-    const body = JSON.stringify(formVal.form.value);   
-      const headers = new Headers({'Content-Type':  'application/json'});  
+  getAccountInfo(data):Observable<any>{
+    //console.log(formVal.form.value,"Account Info");//http://localhost:4300/customers/add
+    const body = JSON.stringify(data);   
+    console.log(body,"body");
+    const headers = new Headers({'Content-Type':  'application/json'});  
 
     return this.http.post('http://localhost:4300/customers/add',body, {headers:headers});       
-  }
-
-  
-      
-
-	}
-
+  }  
 
 }
