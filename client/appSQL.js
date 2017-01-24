@@ -95,7 +95,7 @@ app.post('/add',function(req, res) {
 
 app.get('/test', customers.test );
 app.get('/customers', customers.list);
-app.get('/add', customers.add);
+app.post('/adding', customers.add);
 // app.post('/customers/add', customers.save);
 // app.get('/customers/delete/:id', customers.delete_customer);
 // app.get('/customers/edit/:id', customers.edit);

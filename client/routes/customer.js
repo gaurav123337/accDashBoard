@@ -29,11 +29,16 @@ exports.list = function(req, res) {
 
 };
 
-exports.add = function(req, res) {
+exports.add = function(req, res, next) {
     //res.render('add_customer', { page_title: "Add Customers - Node.js" });
+    
+    console.log(req,"req");
+    res.send("Hello babes ..");
+    // next(new Error('not implemented'));
 
-    var input = JSON.parse(JSON.stringify(req.body));
-    console.log(req.body, "BODY");
+
+    // var input = JSON.parse(JSON.stringify(req.body));
+    // console.log(req.body, "BODY");
     // req.getConnection(function(err, connection) {
     //     var data = {
     //         name: input.name,
@@ -46,7 +51,7 @@ exports.add = function(req, res) {
 
     //         if (err)
     //             console.log("Error Selecting : %s ", err);     
-    //             res.json(rows);            
+    //             res.send(rows);            
     //     });       
     // });
 };
