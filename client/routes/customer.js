@@ -3,22 +3,28 @@
  */
 
 exports.test = function(req, res) {
+    console.log("request " + req + "res ="+ res);
     console.log("test");
     req.getConnection(function(err, connection) {
         var query = connection.query('SELECT * FROM customer', function(err, rows) {
-            if (err)
+            if (err){
                 console.log("Error Selecting : %s ", err);                            
+            }
+            res.send(rows);
         });        
     });
 
+    
 };
 
 exports.list = function(req, res) {
     req.getConnection(function(err, connection) {
         var query = connection.query('SELECT * FROM customer', function(err, rows) {
-            if (err)
+            if (err){
                 console.log("Error Selecting : %s ", err);                            
-        });        
+            }
+            res.send(rows); 
+        });               
     });
 
 };
@@ -27,34 +33,22 @@ exports.add = function(req, res) {
     //res.render('add_customer', { page_title: "Add Customers - Node.js" });
 
     var input = JSON.parse(JSON.stringify(req.body));
-    // console.log(req.headers, "HEADER");
     console.log(req.body, "BODY");
-    //var input = JSON.parse(req.body);
-    //var input = req.body;
-    //var input = { "name": "d", "address": "d", "email": "d", "phone": "1112" };
-    console.log(input, "INPUT");
-    console.log("In save");
+    // req.getConnection(function(err, connection) {
+    //     var data = {
+    //         name: input.name,
+    //         address: input.address,
+    //         email: input.email,
+    //         phone: input.phone
 
-    req.getConnection(function(err, connection) {
-        var data = {
-            name: input.name,
-            address: input.address,
-            email: input.email,
-            phone: input.phone
+    //     };
+    //     var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
 
-        };
-        var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
-
-            if (err)
-                console.log("Error Selecting : %s ", err);
-
-            //res.render('customers111', { page_title: "Customers - Node.js", data: rows });
-
-            console.log(res.json(rows), "RESPONSE HIHIHI");
-        });
-
-        //console.log(query.sql);
-    });
+    //         if (err)
+    //             console.log("Error Selecting : %s ", err);     
+    //             res.json(rows);            
+    //     });       
+    // });
 };
 
 exports.edit = function(req, res) {

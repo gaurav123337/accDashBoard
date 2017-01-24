@@ -32,6 +32,7 @@ export class GetAccountInfoService {
    
   addCustomer(add): Observable<any> {
     console.log(add);
+    //return this.http.post("/add", JSON.stringify(add), this.options);
     return this.http.post("/add", JSON.stringify(add), this.options);
   } 
 
