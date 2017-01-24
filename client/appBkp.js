@@ -22,11 +22,7 @@ var mysql = require('mysql');
 
 // all environments
 app.set('port', process.env.PORT || 4300);
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-
-//app.set('views', './src/');
-app.set('views', path.join(__dirname, '../dist'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //app.use(express.logger('dev'));
@@ -68,6 +64,19 @@ if ('development' == app.get('env')) {
     type koneksi : single,pool and request 
 -------------------------------------------*/
 
+// app.use(
+
+//     connection(mysql, {
+
+//         host: 'localhost',
+//         user: 'root',
+//         password: 'Cxps#321',
+//         database: 'sample'
+
+//     }, 'pool') //or single
+
+// );
+
 app.use(
 
     connection(mysql, {
@@ -77,11 +86,9 @@ app.use(
         password: 'Cxps#321',
         database: 'sample'
 
-    }, 'pool') //or single
+    }) //or single
 
 );
-
-
 
 
 

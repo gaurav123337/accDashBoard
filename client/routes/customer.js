@@ -2,27 +2,59 @@
  * GET users listing.
  */
 
-exports.list = function(req, res) {
-
+exports.test = function(req, res) {
+    console.log("test");
     req.getConnection(function(err, connection) {
-
         var query = connection.query('SELECT * FROM customer', function(err, rows) {
-
             if (err)
-                console.log("Error Selecting : %s ", err);
+                console.log("Error Selecting : %s ", err);                            
+        });        
+    });
 
-            res.render('customers', { page_title: "Customers - Node.js", data: rows });
-            console.log("rows", rows);
+};
 
-        });
-
-        //console.log(query.sql);
+exports.list = function(req, res) {
+    req.getConnection(function(err, connection) {
+        var query = connection.query('SELECT * FROM customer', function(err, rows) {
+            if (err)
+                console.log("Error Selecting : %s ", err);                            
+        });        
     });
 
 };
 
 exports.add = function(req, res) {
-    res.render('add_customer', { page_title: "Add Customers - Node.js" });
+    //res.render('add_customer', { page_title: "Add Customers - Node.js" });
+
+    var input = JSON.parse(JSON.stringify(req.body));
+    // console.log(req.headers, "HEADER");
+    console.log(req.body, "BODY");
+    //var input = JSON.parse(req.body);
+    //var input = req.body;
+    //var input = { "name": "d", "address": "d", "email": "d", "phone": "1112" };
+    console.log(input, "INPUT");
+    console.log("In save");
+
+    req.getConnection(function(err, connection) {
+        var data = {
+            name: input.name,
+            address: input.address,
+            email: input.email,
+            phone: input.phone
+
+        };
+        var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
+
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+            //res.render('customers111', { page_title: "Customers - Node.js", data: rows });
+
+            console.log(res.json(rows), "RESPONSE HIHIHI");
+        });
+
+        //console.log(query.sql);
+    });
 };
 
 exports.edit = function(req, res) {
@@ -36,7 +68,7 @@ exports.edit = function(req, res) {
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('edit_customer', { page_title: "Edit Customers - Node.js", data: rows });
+            //res.render('edit_customer', { page_title: "Edit Customers - Node.js", data: rows });
 
 
         });
@@ -52,39 +84,33 @@ exports.save = function(req, res) {
     var input = JSON.parse(JSON.stringify(req.body));
     // console.log(req.headers, "HEADER");
     console.log(req.body, "BODY");
-    //var input = JSON.parse(req.body);
-    //var input = req.body;
-    //var input = { "name": "d", "address": "d", "email": "d", "phone": "1112" };
+
     console.log(input, "INPUT");
     console.log("In save");
-    req.getConnection(function(err, connection) {
+    // req.getConnection(function(err, connection) {
 
-        var data = {
-            name: input.name,
-            address: input.address,
-            email: input.email,
-            phone: input.phone
+    //     var data = {
+    //         name: input.name,
+    //         address: input.address,
+    //         email: input.email,
+    //         phone: input.phone
 
-        };
+    //     };
 
-        // var data = {
-        //     name: input.name,
-        //     address: input.address,
-        //     email: input.email
-        // };
-        console.log(data, "data");
-        var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
-            console.log("ROWS", rows);
-            if (err)
-                console.log("Error inserting : %s ", err);
 
-            //res.redirect('/customers');
+    //     console.log(data, "data");
+    //     var query = connection.query("INSERT INTO customer set ? ", data, function(err, rows) {
+    //         console.log("ROWS", rows);
+    //         if (err)
+    //             console.log("Error inserting : %s ", err);
 
-        });
+    //         //res.redirect('/customers');
 
-        // console.log(query.sql); get raw query
+    //     });
 
-    });
+    //     // console.log(query.sql); get raw query
+
+    // });
 };
 
 exports.save_edit = function(req, res) {
@@ -108,7 +134,7 @@ exports.save_edit = function(req, res) {
             if (err)
                 console.log("Error Updating : %s ", err);
 
-            res.redirect('/customers');
+            //res.redirect('/customers');
 
         });
 
@@ -127,7 +153,7 @@ exports.delete_customer = function(req, res) {
             if (err)
                 console.log("Error deleting : %s ", err);
 
-            res.redirect('/customers');
+            //res.redirect('/customers');
 
         });
 

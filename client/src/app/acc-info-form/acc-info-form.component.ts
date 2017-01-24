@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
 import { AccInfo } from './acc-info-form';
 
 import { GetAccountInfoService } from './get-account-info.service';
@@ -12,12 +13,17 @@ import { GetAccountInfoService } from './get-account-info.service';
 export class AccInfoFormComponent implements OnInit {
 
   private formVal:any;
+  private accInfoList:any;
+  private lists = [];
 
   constructor(private accInfoService :GetAccountInfoService) {  
 
   }
 
-  ngOnInit() {
+  ngOnInit() {     
+
+    //Get customer list  
+    this.getList();
   }
 
   model = new AccInfo(18, '', '', '', '');
@@ -27,30 +33,30 @@ export class AccInfoFormComponent implements OnInit {
     this.model = new AccInfo(42, '', '', '', '');
   }
 
-  // getFormVal(formVal){
-   
-  //   var data = formVal.form.value;
-  //    console.log(data,"formVal data");
 
-  //   this.accInfoService.getAccountInfo(JSON.stringify(data))
-  //     .subscribe(
-  //       () => console.log('Success!!!'),
-  //       error =>  console.error('Error!!')
-  //   ); 
-  // }
+   addCustomer(formVal) {
+    this.accInfoService.addCustomer(formVal.value).subscribe(
+      res => {
+        var newCustomer = res.json();
+        this.lists.push(newCustomer);
+        //this.addCustomerForm.reset();
+        //this.toast.setMessage("item added successfully.", "success");
+      },
+      error => console.log(error)
+    );
+  }
 
-  getFormVal(){
-   
-    var data = {
-      "name":"test"
-    };
-     console.log(data,"formVal data");
 
-    this.accInfoService.getAccountInfo(JSON.stringify(data))
-      .subscribe(
-        () => console.log('Success!!!'),
-        error =>  console.error('Error!!')
-    ); 
+  getList() {
+    this.accInfoService.getLists().subscribe(
+      data => {
+         console.log(data.json());
+          this.accInfoList = JSON.stringify(data.json());
+      }
+      //this.lists = data,
+      // error => console.log(error),
+      // () => this.isLoading = false
+    );
   }
 
 

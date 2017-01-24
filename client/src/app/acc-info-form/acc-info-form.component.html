@@ -9,6 +9,7 @@
                 <input type="file" class="form-control" id="userPic" [(ngModel)]="model.userPic" name="userPic">
             </div>
         </div>
+        <p>{{this.accInfoList}}</p>
         <div [hidden]="submitted" class="col-md-9">
 
             <form (ngSubmit)="onSubmit()" #accForm="ngForm">
@@ -31,6 +32,11 @@
                     <input type="text" class="form-control" id="password" [(ngModel)]="model.password" name="password">
                 </div>
 
+                 <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" [(ngModel)]="model.address" name="address">
+                </div>
+
                 <div class="form-group">
                     <label for="name">Email</label>
                     <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
@@ -40,11 +46,34 @@
                 </div>
 
                 <button type="submit" class="btn btn-default" [disabled]="!accForm.form.valid">Submit</button>
-                <button type="button" class="btn btn-default" (click)="getFormVal(accForm)">Go</button>
+                <button type="button" class="btn btn-default" (click)="addCustomer(accForm)">Go</button>
                 <button type="button" class="btn btn-default" (click)="newAccInfo(); newAccInfo.reset()">New Account</button>
             </form>
         </div>
-        <div [hidden]="!submitted">
+
+       <!--  <div class="card" *ngIf="!isEditing">
+            <h4 class="card-header">Add new customer</h4>
+            <div class="card-block">
+                <form class="form-inline" [formGroup]="addCustomerForm" (ngSubmit)="addCustomer()" style="text-align:center">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="address" formControlName="address" placeholder="address" min="0">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="email" formControlName="email" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="number" name="phone" formControlName="phone" placeholder="phone">
+                    </div>
+                    <button class="btn btn-primary" type="submit" [disabled]="!addCustomerForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+                </form>
+            </div>
+        </div> -->
+
+        <!-- <div >
             <h2>You submitted the following:</h2>
             <div class="row">
                 <div class="col-xs-3">Name</div>
@@ -60,6 +89,6 @@
             </div>
             <br>
             <button class="btn btn-default" (click)="submitted=false">Edit</button>
-        </div>
+        </div> -->
     </div>
 </div>
